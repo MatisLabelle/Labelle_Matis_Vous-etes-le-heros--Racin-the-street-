@@ -2,8 +2,11 @@
 Développement web - Projet vous êtes le héros
 
 **Genre**: Action
+
 **Inspiration**: Fast and Furious
+
 Titre: Racin' the street
+
 Pallette de couleur:
 - #BF1A0B
 - #F2490C
