@@ -1,4 +1,4 @@
-# <span style="font-family:;>Racin-the-street<span/>
+# Racin-the-street
 
 Genre: Action
 Inspiration: Fast and Furious
@@ -9,3 +9,5 @@ Pallette de couleur:
 - #F27B13
 - #1F64BF
 - #0F1B40
+
+![Shéma de l'histoire](assets/
