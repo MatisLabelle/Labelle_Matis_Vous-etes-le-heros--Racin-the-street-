@@ -10,4 +10,4 @@ Pallette de couleur:
 - #1F64BF
 - #0F1B40
 
-![Shéma de l'histoire](assets/
+![Shéma de l'histoire](assets/Labelle_Matis_vous-etes-le-heros_582-324MO/images/labelle_matis_ps1.1 (1).jpg)
