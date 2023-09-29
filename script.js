@@ -44,14 +44,17 @@ let chapters = {
       {
         titre: "Pneus et roues",
         destination: "meet",
+        clicked: false,
       },
       {
         titre: "Suspension et échappement",
         destination: "meet",
+        clicked: false,
       },
       {
         titre: "Turbo et tune",
         destination: "meet",
+        clicked: false,
       },
     ]),
   },
@@ -63,7 +66,7 @@ let chapters = {
     boutons: (options = [
       {
         titre: "Oui",
-        destination: "victoire",
+        destination: "defaite",
       },
       {
         titre: "Non",
@@ -93,6 +96,8 @@ let textChapitre = document.getElementById("text");
 let imageChapitre = document.getElementById("image-album");
 let btns = document.querySelector(".btn-pg1");
 
+let twist = false;
+
 function goToChapter(chapitreKey) {
   if (chapters[chapitreKey]) {
     const chapitre = chapters[chapitreKey];
@@ -108,7 +113,15 @@ function goToChapter(chapitreKey) {
       btn.textContent = chapitre.boutons[i].titre;
       btns.appendChild(btn);
       btn.addEventListener("click", function () {
-        goToChapter(chapitre.boutons[i].destination);
+        if (
+          chapitreKey === "meet" &&
+          chapitre.boutons[i].titre === "Oui" &&
+          twist
+        ) {
+          goToChapter("victoire");
+        } else {
+          goToChapter(chapitre.boutons[i].destination);
+        }
       });
     }
   } else {
@@ -117,3 +130,9 @@ function goToChapter(chapitreKey) {
 }
 
 goToChapter("debut");
+
+let suspBtn = chapters.garage.boutons[1];
+suspBtn.addEventListener("click", changeTwist());
+function changeTwist() {
+  twist = true;
+}
