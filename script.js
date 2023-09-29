@@ -71,14 +71,27 @@ let chapters = {
       },
     ]),
   },
+  victoire: {
+    titre: "Victoire",
+    description:
+      "Bravo ! Vous avez gagnez la course contre la mustang. Vous êtes maintenant un membre respecté de la communauté.",
+  },
+  defaite: {
+    titre: "Défaite",
+    description: "Vous avez perdu la course.",
+    boutons: (options = [
+      {
+        titre: "Réessayer",
+        destination: "debut",
+      },
+    ]),
+  },
 };
 
 let titreChapitre = document.getElementById("chapitre");
 let textChapitre = document.getElementById("text");
 let imageChapitre = document.getElementById("image-album");
-let btn1 = document.getElementById("btn1");
-let btn2 = document.getElementById("btn2");
-let btn3 = document.getElementById("btn3");
+let btns = document.querySelector(".btn-pg1");
 
 function goToChapter(chapitreKey) {
   if (chapters[chapitreKey]) {
@@ -86,9 +99,18 @@ function goToChapter(chapitreKey) {
     titreChapitre.textContent = chapitre.titre;
     textChapitre.textContent = chapitre.description;
     imageChapitre.src = chapitre.image;
-    btn1.textContent = chapitre.boutons[0].titre;
-    btn2.textContent = chapitre.boutons[1].titre;
-    btn3.textContent = chapitre.boutons[2].titre;
+    while (btns.firstChild) {
+      btns.removeChild(btns.firstChild);
+    }
+    for (let i = 0; i < chapitre.boutons.length; i++) {
+      let btn = document.createElement("button");
+      btn.classList.add("btn");
+      btn.textContent = chapitre.boutons[i].titre;
+      btns.appendChild(btn);
+      btn.addEventListener("click", function () {
+        goToChapter(chapitre.boutons[i].destination);
+      });
+    }
   } else {
     console.log("Chapitre introuvable");
   }
