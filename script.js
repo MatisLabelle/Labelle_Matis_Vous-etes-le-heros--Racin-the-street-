@@ -3,7 +3,7 @@ let chapters = {
     titre: "Le concessionnaire",
     description:
       "Vous arrivez au concessionnaire de votre oncle, un endroit rempli de voitures brillantes et étincelantes. Votre oncle vous a offert une occasion unique de choisir entre trois voitures : la VW Golf GTI, l'Acura RSX et la Ford Focus RS. Chacune d'entre elles a ses propres caractéristiques et son charme particulier.",
-    image: "fonts/images/choix-voiture.png",
+    image: "assets/images/choix-voiture.png",
     boutons: (options = [
       {
         titre: "Acura Rsx",
@@ -23,7 +23,7 @@ let chapters = {
     titre: "La course",
     description:
       "Vous quittez le concessionnaire au volant de votre nouvelle voiture, le moteur ronronnant avec puissance. Alors que vous vous arrêtez à un feu rouge, une Ford Mustang se glisse à côté de vous. Le conducteur vous regarde avec un sourire espiègle et vous fait signe de la tête, suggérant une course.",
-    image: "fonts/images/mustang-red-light.png",
+    image: "assets/images/mustang-red-light.png",
     boutons: (options = [
       {
         titre: "Oui",
@@ -31,7 +31,7 @@ let chapters = {
       },
       {
         titre: "Non",
-        destination: "defaite",
+        destination: "garage",
       },
     ]),
   },
@@ -73,15 +73,25 @@ let chapters = {
   },
 };
 
+let titreChapitre = document.getElementById("chapitre");
+let textChapitre = document.getElementById("text");
+let imageChapitre = document.getElementById("image-album");
+let btn1 = document.getElementById("btn1");
+let btn2 = document.getElementById("btn2");
+let btn3 = document.getElementById("btn3");
+
 function goToChapter(chapitreKey) {
   if (chapters[chapitreKey]) {
     const chapitre = chapters[chapitreKey];
-    console.log(`Titre: ${chapitre.titre}`);
-    console.log(`Description: ${chapitre.description}`);
-    console.log(`Boutons: ${chapitre.boutons.join(", ")}`);
+    titreChapitre.textContent = chapitre.titre;
+    textChapitre.textContent = chapitre.description;
+    imageChapitre.src = chapitre.image;
+    btn1.textContent = chapitre.boutons[0].titre;
+    btn2.textContent = chapitre.boutons[1].titre;
+    btn3.textContent = chapitre.boutons[2].titre;
   } else {
     console.log("Chapitre introuvable");
   }
 }
 
-console.log(goToChapter("debut"));
+goToChapter("debut");
