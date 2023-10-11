@@ -116,13 +116,22 @@ function goToChapter(chapitreKey) {
         if (
           chapitreKey === "meet" &&
           chapitre.boutons[i].titre === "Oui" &&
-          twist
+          twist == true
         ) {
           goToChapter("victoire");
         } else {
           goToChapter(chapitre.boutons[i].destination);
         }
       });
+
+      if (
+        chapitreKey === "garage" &&
+        chapitre.boutons[i].titre === "Suspension et échappement"
+      ) {
+        btn.addEventListener("click", function () {
+          twist = true;
+        });
+      }
     }
   } else {
     console.log("Chapitre introuvable");
@@ -130,9 +139,3 @@ function goToChapter(chapitreKey) {
 }
 
 goToChapter("debut");
-
-let suspBtn = chapters.garage.boutons[1];
-suspBtn.addEventListener("click", changeTwist());
-function changeTwist() {
-  twist = true;
-}
