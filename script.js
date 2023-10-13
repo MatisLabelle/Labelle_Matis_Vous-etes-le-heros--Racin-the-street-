@@ -79,10 +79,12 @@ const chapters = {
     titre: "Victoire",
     description:
       "Bravo ! Vous avez gagnez la course contre la mustang. Vous êtes maintenant un membre respecté de la communauté.",
+    image: "assets/images/victoire.png",
   },
   defaite: {
     titre: "Défaite",
     description: "Vous avez perdu la course.",
+    image: "assets/images/defaite.png",
     boutons: [
       {
         titre: "Réessayer",
