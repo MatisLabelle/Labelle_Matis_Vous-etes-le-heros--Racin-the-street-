@@ -132,6 +132,9 @@ function goToChapter(chapitreKey) {
       let video = document.createElement("video");
       video.src = chapitre.video;
       video.classList.add("media");
+      video.addEventListener("ended", function () {
+        video.play();
+      });
       container.appendChild(video);
       video.play();
       video.volume = 0;
