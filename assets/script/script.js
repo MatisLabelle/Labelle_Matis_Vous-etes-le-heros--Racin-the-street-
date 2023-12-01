@@ -127,6 +127,47 @@ function goToChapter(chapitreKey) {
       container.removeChild(media);
     }
 
+    // créer les nouveaux boutons
+    function createBtn(chapitre) {
+      while (btns.firstChild) {
+        btns.removeChild(btns.firstChild);
+      }
+
+      for (let i = 0; i < chapitre.boutons.length; i++) {
+        let btn = document.createElement("button");
+        btn.classList.add("btn");
+        btn.textContent = chapitre.boutons[i].titre;
+        btns.appendChild(btn);
+
+        // si la twist est true, et qu'on fait la course au chapitre meet, nous envoie à la victoire
+        btn.addEventListener("click", function () {
+          if (
+            chapitreKey === "meet" &&
+            chapitre.boutons[i].titre === "Oui" &&
+            localStorage.getItem("twist") == "true"
+          ) {
+            goToChapter("victoire");
+          } else {
+            goToChapter(chapitre.boutons[i].destination);
+          }
+
+          // met la twist à true si on choisit suspension et échappement
+          if (
+            chapitreKey === "garage" &&
+            chapitre.boutons[i].titre === "Suspension et échappement"
+          ) {
+            localStorage.setItem("twist", "true");
+          }
+
+          if (chapitreKey === "victoire") {
+            localStorage.clear();
+          } else if (chapitreKey === "defaite") {
+            localStorage.clear();
+          }
+        });
+      }
+    }
+
     // change l'interface pour le nouveau chapitre
     if (chapitre.video) {
       let video = document.createElement("video");
@@ -140,86 +181,51 @@ function goToChapter(chapitreKey) {
       video.volume = 0;
       titreChapitre.textContent = chapitre.titre;
       textChapitre.textContent = chapitre.description;
-
-      while (btns.firstChild) {
-        btns.removeChild(btns.firstChild);
-      }
-
-      // créer les nouveaux boutons
-      for (let i = 0; i < chapitre.boutons.length; i++) {
-        let btn = document.createElement("button");
-        btn.classList.add("btn");
-        btn.textContent = chapitre.boutons[i].titre;
-        btns.appendChild(btn);
-
-        // si la twist est true, et qu'on fait la course au chapitre meet, nous envoie à la victoire
-        btn.addEventListener("click", function () {
-          if (
-            chapitreKey === "meet" &&
-            chapitre.boutons[i].titre === "Oui" &&
-            twist == true
-          ) {
-            goToChapter("victoire");
-          } else {
-            goToChapter(chapitre.boutons[i].destination);
-          }
-        });
-      }
-
-      // met la twist à true si on choisit suspension et échappement
-      if (
-        chapitreKey === "garage" &&
-        chapitre.boutons[i].titre === "Suspension et échappement"
-      ) {
-        twist = true;
-      }
+      createBtn(chapitre);
     } else {
       container.appendChild(imageChapitre);
       imageChapitre.classList.add("media");
       titreChapitre.textContent = chapitre.titre;
       textChapitre.textContent = chapitre.description;
       imageChapitre.src = chapitre.image;
-
-      while (btns.firstChild) {
-        btns.removeChild(btns.firstChild);
-      }
-
-      // créer les nouveaux boutons
-      for (let i = 0; i < chapitre.boutons.length; i++) {
-        let btn = document.createElement("button");
-        btn.classList.add("btn");
-        btn.textContent = chapitre.boutons[i].titre;
-        btns.appendChild(btn);
-
-        // si la twist est true, et qu'on fait la course au chapitre meet, nous envoie à la victoire
-        btn.addEventListener("click", function () {
-          if (
-            chapitreKey === "meet" &&
-            chapitre.boutons[i].titre === "Oui" &&
-            twist == true
-          ) {
-            goToChapter("victoire");
-          } else {
-            goToChapter(chapitre.boutons[i].destination);
-          }
-        });
-
-        // met la twist à true si on choisit suspension et échappement
-        if (
-          chapitreKey === "garage" &&
-          chapitre.boutons[i].titre === "Suspension et échappement"
-        ) {
-          btn.addEventListener("click", function () {
-            twist = true;
-          });
-        }
-      }
+      createBtn(chapitre);
     }
 
     // message d'erreur dans la console
   } else {
     console.log("Chapitre introuvable");
   }
+
+  // sauvgarde
+  localStorage.setItem("chapitre", chapitreKey);
 }
-// commence le jeu au premier chapitre
-goToChapter("debut");
+
+// reprend l'histoire ou elle a été laissé ou au début
+if (localStorage.getItem("chapitre") !== null) {
+  goToChapter(localStorage.getItem("chapitre"));
+} else {
+  goToChapter("debut");
+}
+
+// bouton reset
+let reset = document.querySelector(".reset");
+reset.addEventListener("click", function () {
+  localStorage.clear();
+  goToChapter("debut");
+});
+
+//Mute
+let mute = document.querySelector("#mute");
+mute.addEventListener("change", function () {
+  if (mute.checked) {
+    vroum.volume = 0;
+    localStorage.setItem("mute", "true");
+  } else {
+    vroum.volume = 1;
+    localStorage.setItem("mute", "false");
+  }
+});
+
+if (localStorage.getItem("mute") == "true") {
+  mute.checked = true;
+}

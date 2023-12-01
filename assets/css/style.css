@@ -1,6 +1,6 @@
 @font-face {
   font-family: "osaka";
-  src: url(assets/fonts/osaka-re.ttf);
+  src: url(../../assets/fonts/osaka-re.ttf);
 }
 
 * {
@@ -9,7 +9,13 @@
 }
 
 body {
-  background-color: #1f64bf;
+  background-image: linear-gradient(#f27b13, #bf1a0b);
+  height: 120vh;
+  background-repeat: no-repeat;
+  background-size: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 #album {
@@ -22,8 +28,8 @@ body {
 
 #jeu {
   position: relative;
-  width: 800px;
-  height: 700px;
+  width: 60%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,35 +38,41 @@ body {
   padding: 20px;
   color: #f2490c;
   box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.5);
+  flex-shrink: 1;
 }
 
 h1 {
   font-family: "osaka";
-  font-size: 80px;
+  font-size: 72px;
   text-align: center;
   position: relative;
-  top: -75px;
+  top: 0px;
   left: 0;
   right: 0;
+  line-height: 4rem;
+  flex-shrink: 1;
+  color: #1f64bf;
 }
 
 #chapitre {
   width: 100%;
   font-size: 48px;
   text-align: center;
-  position: absolute;
-  top: 30px;
+  position: relative;
+  top: -100px;
   color: #bf1a0b;
   align-self: center;
+  flex-shrink: 1;
 }
 
 .media {
   position: relative;
-  top: -100px;
+  bottom: 25%;
   width: 80%;
   height: auto;
   object-fit: cover;
   align-self: center;
+  flex-shrink: 1;
 }
 
 #text {
@@ -71,12 +83,13 @@ h1 {
   display: block;
   height: 50%;
   position: relative;
-  top: -100px;
+  top: -150px;
+  flex-shrink: 1;
 }
 
 .btn-pg1 {
   position: absolute;
-  bottom: 20px;
+  bottom: 1%;
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -84,7 +97,7 @@ h1 {
 }
 
 .btn {
-  width: 200px;
+  width: 75%;
   height: 75px;
   position: relative;
   border-radius: 20px;
@@ -92,5 +105,127 @@ h1 {
   color: #f27b13;
   font-size: 24px;
   font-weight: 600;
+  flex-shrink: 1;
   border: solid #f2490c;
+  box-shadow: 0 0 10px 5px #1f64bf;
+}
+
+.btn:hover {
+  background-color: #0f1b40;
+}
+
+.reset {
+  position: relative;
+  bottom: 10px;
+  left: 10px;
+  background-color: #0f1b40;
+  box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.5);
+  border: solid #bf1a0b;
+  align-self: flex-start;
+}
+
+.reset:hover {
+  background-color: #1f64bf;
+}
+
+.mute {
+  position: relative;
+  bottom: 85px;
+  right: 10px;
+  background-color: #0f1b40;
+  box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.5);
+  border: solid #bf1a0b;
+  text-align: center;
+  padding: 20px;
+  align-self: flex-end;
+}
+
+@media screen and (orientation: portrait) {
+  #titre {
+    font-size: 52px;
+    top: -5%;
+    line-height: 3rem;
+  }
+
+  #chapitre {
+    bottom: 50%;
+    font-size: 36px;
+  }
+
+  #text {
+    bottom: 20%;
+  }
+
+  .media {
+    top: -20%;
+    width: 100%;
+  }
+
+  .btn {
+    font-size: 20px;
+  }
+
+  .mute {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #titre {
+    font-size: 200%;
+    top: -8%;
+    line-height: 2rem;
+  }
+
+  #chapitre {
+    top: -13%;
+    font-size: 150%;
+  }
+
+  #text {
+    top: -18%;
+    font-size: 100%;
+  }
+
+  .media {
+    top: -20%;
+    width: 100%;
+  }
+
+  .btn-pg1 {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    bottom: 3%;
+    height: 20%;
+  }
+
+  .btn {
+    font-size: 16px;
+    height: 50px;
+  }
+
+  .mute {
+    padding: 12px;
+  }
+
+  .reset {
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .btn-pg1 {
+    bottom: 1%;
+  }
+
+  .media {
+    top: -30%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #text {
+    font-size: 100%;
+  }
 }
