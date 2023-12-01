@@ -97,7 +97,7 @@ h1 {
 }
 
 .btn {
-  width: 75%;
+  width: 200px;
   height: 75px;
   position: relative;
   border-radius: 20px;
@@ -163,6 +163,7 @@ h1 {
 
   .btn {
     font-size: 20px;
+    width: 75%;
   }
 
   .mute {
